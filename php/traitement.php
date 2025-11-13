@@ -28,7 +28,7 @@ if (!in_array($sexe, ['H', 'F'])) {
     $erreurs[] = "Le sexe doit être H ou F.";
 }
 
-$villesAutorisees = ["Paris", "Lyon", "Marseille", "Toulouse"];
+$villesAutorisees = ["Paris", "Tourcoin", "Marseille", "Moscou"];
 if (!in_array($ville, $villesAutorisees)) {
     $erreurs[] = "Ville non reconnue.";
 }
@@ -45,10 +45,10 @@ if (!empty($erreurs)) {
 
 // fausse liste
 $profils = [
-    ["nom" => "Alice", "ville" => "Paris", "sexe" => "F", "loisirs" => ["Lecture", "Musique"]],
-    ["nom" => "Bob", "ville" => "Lyon", "sexe" => "H", "loisirs" => ["Sport"]],
-    ["nom" => "Claire", "ville" => "Marseille", "sexe" => "F", "loisirs" => ["Musique", "Sport"]],
-    ["nom" => "David", "ville" => "Toulouse", "sexe" => "H", "loisirs" => ["Lecture"]],
+    ["nom" => "Damien", "ville" => "Marseille", "sexe" => "F", "loisirs" => ["Lecture", "Musique"]],
+    ["nom" => "Maxim", "ville" => "Moscou", "sexe" => "H", "loisirs" => ["Sport"]],
+    ["nom" => "Janique", "ville" => "Tourcoin", "sexe" => "F", "loisirs" => ["Musique", "Sport"]],
+    ["nom" => "Adrien", "ville" => "Paris", "sexe" => "F", "loisirs" => ["Sport"]],
 ];
 
 // Filtrage des profils qui partagent la même ville ou un loisir

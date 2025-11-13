@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8">
+  <title>TP – Formulaire et Traitement PHP</title>
+</head>
+<body>
+  <h2>Formulaire d'inscription</h2>
+
+  <form action="traitement.php" method="post">
+    <label for="nom">Nom :</label>
+    <input type="text" id="nom" name="nom" required minlength="2" maxlength="50"><br><br>
+
+    <label for="email">Email :</label>
+    <input type="email" id="email" name="email" required><br><br>
+
+    <label for="password">Mot de passe :</label>
+    <input type="password" id="password" name="password" required minlength="6"><br><br>
+
+    <label>Sexe :</label>
+    <input type="radio" id="homme" name="sexe" value="H" required>
+    <label for="homme">Homme</label>
+    <input type="radio" id="femme" name="sexe" value="F">
+    <label for="femme">Femme</label><br><br>
+
+    <label for="ville">Ville :</label>
+    <select id="ville" name="ville" required>
+      <option value="">-- Sélectionnez votre ville --</option>
+      <option value="Paris">Paris</option>
+      <option value="Lyon">Lyon</option>
+      <option value="Marseille">Marseille</option>
+      <option value="Toulouse">Toulouse</option>
+    </select><br><br>
+
+    <label>Loisirs :</label><br>
+    <input type="checkbox" name="loisirs[]" value="Sport"> Sport<br>
+    <input type="checkbox" name="loisirs[]" value="Musique"> Musique<br>
+    <input type="checkbox" name="loisirs[]" value="Lecture"> Lecture<br><br>
+
+    <label>Animaux de compagnie :</label><br>
+    <input type="checkbox" name="animaux[]" value="Chien"> Chien<br>
+    <input type="checkbox" name="animaux[]" value="Chameau"> Chameau<br>
+    <input type="checkbox" name="animaux[]" value="Tigre"> Tigre<br><br>
+
+    <input type="submit" value="Envoyer">
+  </form>
+</body>
+</html>

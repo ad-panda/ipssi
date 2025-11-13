@@ -13,4 +13,7 @@ Index.html
 
 traitement.php
 
-- fichier php avec 
+- fichier php avec conditions 
+- verifications du formulaire
+- correspondance avec base de donnée
+- page html de confirmation

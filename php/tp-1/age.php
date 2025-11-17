@@ -14,7 +14,7 @@
         <button type="submit">Envoyer</button>
     </form>
     <?php
-    function structure($age){
+    function school($age){
       if ($age <= 3)
         echo"a la creche";
         else if ($age <= 6)
@@ -31,7 +31,7 @@
 
       $age = (int)($_POST["age"]);
       echo "<p>Pour $age ans, vous êtes " ;
-      structure($age);
+      school($age);
       echo ".</p>";
     ?>
 </body>

@@ -8,10 +8,10 @@
 
 <form method="post">
     <label for="mot">Entrez un mot :</label>
-    <input type="text" id="mot" name="mot" placeholder="Ex : bonjour" required>
+    <input type="text" id="mot" name="mot" placeholder="Ex :bonjour monsieurrr (haystack)" required>
     <br><br>
     <label for="mot2">Entrez un mot :</label>
-    <input type="text" id="mot2" name="mot2" placeholder="Ex : bonjourmongars" required>
+    <input type="text" id="mot2" name="mot2" placeholder="Ex : bonjour (needle)" required>
     <br><br>
     <button type="submit">Envoyer</button>
 </form>
@@ -27,14 +27,10 @@ function my_str_contains($haystack, $needle)
         return false;
     }
 
-    for ($i = 0; $i < $lenH; $i++) {
-        for ($j = 0; $j < $lenN; $j++) {
-            if (!isset($haystack[$i + $j])) {
-                return false; 
-            }
-            if ($haystack[$i + $j] !== $needle[$j]) {
-                break;
-            }
+    for ($i = 0; $i <= $lenH - $lenN; $i++) {
+        $j = 0;
+        while ($j < $lenN && isset($haystack[$i + $j]) && $haystack[$i + $j] === $needle[$j]) {
+            $j++;
         }
         if ($j === $lenN) {
             return true;
@@ -43,6 +39,7 @@ function my_str_contains($haystack, $needle)
 
     return false;
 }
+
 
 if ($_SERVER["REQUEST_METHOD"] === "POST") {
     $mot = $_POST["mot"];
@@ -55,10 +52,10 @@ if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
     echo "<p>Mot original : $mot et $mot2<br>";
 
-    if($resultat){
-        echo "<strong>$mot</strong> est présent dans $mot2</p>";
+    if($resultat === TRUE){
+        echo "<strong>$mot2</strong> est présent dans $mot</p>";
     } else {
-        echo "<strong>$mot</strong> n'est pas présent dans $mot2</p>";
+        echo "<strong>$mot2</strong> n'est pas présent dans $mot</p>";
     }
 }
 ?>

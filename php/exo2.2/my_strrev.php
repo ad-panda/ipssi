@@ -2,42 +2,51 @@
 <html lang="fr">
 <head>
     <meta charset="UTF-8">
-    <title>doubleboucle</title>
+    <title>Reverse String</title>
 </head>
 <body>
+
 <form method="post">
-        <label for="nbr">Entrez des nombres séparés par des virgules :</label>
-        <input type="text" id="nbr" name="nbr" placeholder="Ex : 10,20,30" required>
-        <br><br>
-        <button type="submit">Envoyer</button>
-    </form>
-    <?php
+    <label for="mot">Entrez un mot :</label>
+    <input type="text" id="mot" name="mot" placeholder="Ex : bonjour" required>
+    <br><br>
+    <button type="submit">Envoyer</button>
+</form>
 
-    function calcMoy($listeNbr){
-      $moy = 0;
-      $len = count($listeNbr);
+<?php
 
-      for ($i = 0; $i != $len; $i++){
-        $moy += $listeNbr[$i];
-      }
 
-      return ($moy / $len);
+function my_strrev($tab)
+{
+    $len = count($tab);
+    $rev = [];
+
+    for ($i = 0; $i < $len; $i++) {
+
+        $indexInverse = $len - 1 - $i;
+
+        $rev[$i] = $tab[$indexInverse];
     }
 
-    $liste = ($_POST["nbr"]);
+    return $rev;
+}
 
-    $listeBrute = explode(",",$liste);
+if ($_SERVER["REQUEST_METHOD"] === "POST") {
 
-    $listeNbr = array_map("intval", $listeBrute);
+    $mot = $_POST["mot"];
 
-    $moyenne = calcMoy($listeNbr);
+    // Convertir le mot en tableau de lettres
+    $tab = str_split($mot);
 
-    $listeAffichage = implode(",",$listeNbr);
+    $tabInverse = my_strrev($tab);
 
-      echo "<p>affiche pour cette liste $listeAffichage la moyenne qui est de :<br>" ;
-      echo"$moyenne<br>";
-      echo "terminer.</p>";
-    ?>
+    // Reconstruire le mot inversé
+    $motInverse = implode("", $tabInverse);
+
+    echo "<p>Mot original : $mot<br>";
+    echo "Mot inversé : <strong>$motInverse</strong></p>";
+}
+?>
+
 </body>
 </html>
-

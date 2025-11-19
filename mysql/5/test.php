@@ -124,14 +124,14 @@ echo "<table border='1' cellpadding='5'>
 </tr>
 </thead>";
 
-foreach ($data as $v) {
+foreach ($data as $valeur) {
     echo "<tr>
-        <td>{$v["nom"]}</td>
-        <td>{$v["pays"]}</td>
-        <td>{$v["course"]}</td>
-        <td>{$v["temps"]}</td>
-        <td>{$v["classement"]}</td>
-        <td><a href='edit.php?id={$v["id"]}'>Modifier</a></td>
+        <td>{$valeur["nom"]}</td>
+        <td>{$valeur["pays"]}</td>
+        <td>{$valeur["course"]}</td>
+        <td>{$valeur["temps"]}</td>
+        <td>{$valeur["classement"]}</td>
+        <td><a href='edit.php?id={$valeur["id"]}'>Modifier</a></td>
     </tr>";
 }
 

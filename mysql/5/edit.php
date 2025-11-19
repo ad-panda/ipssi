@@ -61,10 +61,10 @@ foreach ($errors as $e) {
 
 <form method="post">
     Nom :  
-    <input type="text" name="nom" value="<?= $data['nom'] ?>" required><br><br>
+    <input type="text" name="nom" value="<?php echo $data['nom'] ?>" required><br><br>
 
     Pays (FRA) :  
-    <input type="text" name="pays" maxlength="3" value="<?= $data['pays']?>" required><br><br>
+    <input type="text" name="pays" maxlength="3" value="<?php echo $data['pays']?>" required><br><br>
 
     Course :  
     <select name="course" required>
@@ -77,7 +77,7 @@ foreach ($errors as $e) {
     </select><br><br>
 
     Temps :  
-    <input type="text" name="temps" value="<?= $data['temps'] ?>" required><br><br>
+    <input type="text" name="temps" value="<?php echo $data['temps'] ?>" required><br><br>
 
     <button type="submit" name="submit">Modifier</button>
 </form>

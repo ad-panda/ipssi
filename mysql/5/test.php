@@ -89,7 +89,15 @@ echo '
 <form method="post">
     Nom : <input type="text" name="nom" required><br><br>
     Pays (ex : FRA) : <input type="text" name="pays" maxlength="3" required><br><br>
-    Course : <input type="text" name="course" required><br><br>
+    Course : 
+<select name="course" required>
+    <option value="">--Choisir une course--</option>
+    <option value="Championnats du monde Eugene 2022">Championnats du monde Eugene 2022</option>
+    <option value="Championnats du monde d\'athlétisme 2023">Championnats du monde d\'athlétisme 2023</option>
+    <option value="JO 2008">JO 2008</option>
+    <option value="JO 2012">JO 2012</option>
+    <option value="JO 2020">JO 2020</option>
+</select><br><br>
     Temps : <input type="text" name="temps" required><br><br>
     <input type="submit" name="submit" value="Ajouter">
 </form>

@@ -1,49 +1,137 @@
 <?php
-
 require_once "config.php";
 
-$sort = "nom";
-if(isset($_GET["sort"])) {
-  $sort = $_GET["sort"];
+$sort = $_GET["sort"] ?? "nom";
+$order = $_GET["order"] ?? "asc";
+
+if (!in_array($sort, ["nom","pays","course","temps","classement"])) die("Invalid sort");
+if (!in_array($order, ["asc","desc"])) die("Invalid order");
+
+$errors = [];
+
+if (!empty($_POST["submit"])) {
+    $pays = strtoupper(trim($_POST["pays"]));
+    if (!preg_match("/^[A-Z]{3}$/", $pays)) {
+        $errors[] = "Le pays doit être composé de 3 lettres majuscules (ex : FRA).";
+    }
+
+    if (!is_numeric($_POST["temps"])) {
+        $errors[] = "Le temps doit être un nombre.";
+    }
+
+    if (empty($errors)) {
+        $sthAdd = $dbh->prepare("INSERT INTO jo.`100` (nom,pays,course,temps)
+                                VALUES (:nom,:pays,:course,:temps)");
+        $sthAdd->execute([
+            "nom" => $_POST["nom"],
+            "pays" => $pays,
+            "course" => $_POST["course"],
+            "temps" => $_POST["temps"]
+        ]);
+
+        header("Location: test.php");
+        exit;
+    }
 }
 
-$order = "desc";
-if(isset($_GET["order"])) {
-  $order = $_GET["order"];
+$searchSQL = "";
+$params = [];
+
+if (!empty($_GET["search"])) {
+    $searchSQL = " WHERE nom LIKE :s OR pays LIKE :s OR course LIKE :s ";
+    $params["s"] = "%" . $_GET["search"] . "%";
 }
 
-if(!in_array($sort, ["nom","pays","course","temps"])) {
-  die("Invalid sort");
-}
+$limit = 10;
+$page = isset($_GET["page"]) ? intval($_GET["page"]) : 1;
+$offset = ($page - 1) * $limit;
 
-if(!in_array($order, ["asc","desc"])) {
-  die("Invalid order");
-}
+$count = $dbh->prepare("SELECT COUNT(*) FROM jo.`100` $searchSQL");
+$count->execute($params);
+$total = $count->fetchColumn();
+$totalPages = ceil($total / $limit);
 
-$sth = $dbh -> prepare ("SELECT * FROM jo.`100` order by ".$sort." ".$order);
-$sth->execute();
+$sth = $dbh->prepare("
+    SELECT * FROM jo.`100`
+    $searchSQL
+    ORDER BY $sort $order
+    LIMIT $limit OFFSET $offset
+");
 
+$sth->execute($params);
 $data = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-
-echo"<table>
-<thead>
-<tr>
-<th>Nom <a style='" . ($sort == 'nom' && $order == 'asc' ? 'color:red' : '') . " ' href='./test.php?sort=nom&order=asc'>↑</a> <a style=' " . ($sort == 'nom' && $order == 'desc' ? 'color:red' : '') . " ' href='./test.php?sort=nom&order=desc'>↓</a></th>
-<th>Pays <a style=' " . ($sort == 'pays' && $order == 'asc' ? 'color:red' : '') . " ' href='./test.php?sort=pays&order=asc'>↑</a> <a style=' " . ($sort == 'pays' && $order == 'desc' ? 'color:red' : '') . " ' href='./test.php?sort=pays&order=desc'>↓</a></th>
-<th>Course <a style=' " . ($sort == 'course' && $order == 'asc' ? 'color:red' : '') . " ' href='./test.php?sort=course&order=asc'>↑</a> <a style=' " . ($sort == 'course' && $order == 'desc' ? 'color:red' : '') . " ' href='./test.php?sort=course&order=desc'>↓</a></th> 
-<th>Temps <a style=' " . ($sort == 'temps' && $order == 'asc' ? 'color:red' : '') . " ' href='./test.php?sort=temps&order=asc'>↑</a> <a style=' " . ($sort == 'temps' && $order == 'desc' ? 'color:red' : '') . " ' href='./test.php?sort=temps&order=desc'>↓</a></th>
-</tr>
-</thead>";
-foreach($data as $value){
-  echo "<tr>
-  <td>".$value["nom"]."</td>
-  <td>".$value["pays"]."</td>
-  <td>".$value["course"]."</td>
-  <td>".$value["temps"]."</td>
-  </tr>";
+$courses = [];
+foreach ($data as $row) {
+    $courses[$row["course"]][] = $row;
 }
 
-$sth=Null;
+foreach ($courses as &$rows) {
+    usort($rows, function($a, $b) { return $a["temps"] <=> $b["temps"]; });
+    $rank = 1;
+    foreach ($rows as &$r) {
+        $r["classement"] = $rank++;
+    }
+}
+
+$data = [];
+foreach ($courses as $rows) {
+    foreach ($rows as $r) $data[] = $r;
+}
+
+echo "<h2>Ajouter un résultat</h2>";
+
+if (!empty($errors)) {
+    foreach ($errors as $e) echo "<p style='color:red;'>$e</p>";
+}
+
+echo '
+<form method="post">
+    Nom : <input type="text" name="nom" required><br><br>
+    Pays (ex : FRA) : <input type="text" name="pays" maxlength="3" required><br><br>
+    Course : <input type="text" name="course" required><br><br>
+    Temps : <input type="text" name="temps" required><br><br>
+    <input type="submit" name="submit" value="Ajouter">
+</form>
+<hr>
+';
+
+echo '
+<form method="get">
+    <input type="text" name="search" placeholder="Rechercher..." value="'.($_GET["search"] ?? '').'">
+    <button type="submit">OK</button>
+</form>
+<hr>
+';
+
+echo "<table border='1' cellpadding='5'>
+<thead>
+<tr>
+<th>Nom <a href='?sort=nom&order=asc'>↑</a> <a href='?sort=nom&order=desc'>↓</a></th>
+<th>Pays <a href='?sort=pays&order=asc'>↑</a> <a href='?sort=pays&order=desc'>↓</a></th>
+<th>Course <a href='?sort=course&order=asc'>↑</a> <a href='?sort=course&order=desc'>↓</a></th>
+<th>Temps <a href='?sort=temps&order=asc'>↑</a> <a href='?sort=temps&order=desc'>↓</a></th>
+<th>Classement <a href='?sort=classement&order=asc'>↑</a> <a href='?sort=classement&order=desc'>↓</a></th>
+<th>Modifier</th>
+</tr>
+</thead>";
+
+foreach ($data as $v) {
+    echo "<tr>
+        <td>{$v["nom"]}</td>
+        <td>{$v["pays"]}</td>
+        <td>{$v["course"]}</td>
+        <td>{$v["temps"]}</td>
+        <td>{$v["classement"]}</td>
+        <td><a href='edit.php?id={$v["id"]}'>Modifier</a></td>
+    </tr>";
+}
+
+echo "</table><br>";
+
+for ($i = 1; $i <= $totalPages; $i++) {
+    echo "<a href='?page=$i&sort=$sort&order=$order&search=".($_GET["search"] ?? "")."'> $i </a> ";
+}
+
 $dbh = null;
 ?>

@@ -115,14 +115,42 @@ echo '
 echo "<table border='1' cellpadding='5'>
 <thead>
 <tr>
-<th>Nom <a href='?sort=nom&order=asc'>↑</a> <a href='?sort=nom&order=desc'>↓</a></th>
-<th>Pays <a href='?sort=pays&order=asc'>↑</a> <a href='?sort=pays&order=desc'>↓</a></th>
-<th>Course <a href='?sort=course&order=asc'>↑</a> <a href='?sort=course&order=desc'>↓</a></th>
-<th>Temps <a href='?sort=temps&order=asc'>↑</a> <a href='?sort=temps&order=desc'>↓</a></th>
-<th>Classement <a href='?sort=classement&order=asc'>↑</a> <a href='?sort=classement&order=desc'>↓</a></th>
+
+<th>
+Nom 
+<a href='./test.php?sort=nom&order=asc' style='color:".($sort=='nom' && $order=='asc' ? "red" : "black")."'>↑</a>
+<a href='./test.php?sort=nom&order=desc' style='color:".($sort=='nom' && $order=='desc' ? "red" : "black")."'>↓</a>
+</th>
+
+<th>
+Pays
+<a href='./test.php?sort=pays&order=asc' style='color:".($sort=='pays' && $order=='asc' ? "red" : "black")."'>↑</a>
+<a href='./test.php?sort=pays&order=desc' style='color:".($sort=='pays' && $order=='desc' ? "red" : "black")."'>↓</a>
+</th>
+
+<th>
+Course
+<a href='./test.php?sort=course&order=asc' style='color:".($sort=='course' && $order=='asc' ? "red" : "black")."'>↑</a>
+<a href='./test.php?sort=course&order=desc' style='color:".($sort=='course' && $order=='desc' ? "red" : "black")."'>↓</a>
+</th>
+
+<th>
+Temps
+<a href='./test.php?sort=temps&order=asc' style='color:".($sort=='temps' && $order=='asc' ? "red" : "black")."'>↑</a>
+<a href='./test.php?sort=temps&order=desc' style='color:".($sort=='temps' && $order=='desc' ? "red" : "black")."'>↓</a>
+</th>
+
+<th>
+Classement
+<a href='./test.php?sort=classement&order=asc' style='color:".($sort=='classement' && $order=='asc' ? "red" : "black")."'>↑</a>
+<a href='./test.php?sort=classement&order=desc' style='color:".($sort=='classement' && $order=='desc' ? "red" : "black")."'>↓</a>
+</th>
+
 <th>Modifier</th>
+
 </tr>
 </thead>";
+
 
 foreach ($data as $valeur) {
     echo "<tr>

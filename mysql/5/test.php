@@ -25,7 +25,6 @@ $sth->execute();
 
 $data = $sth->fetchAll(PDO::FETCH_ASSOC);
 
-$url = "href='http://localhost/test/mysql/6.1/test.php?";
 
 echo"<table>
 <thead>

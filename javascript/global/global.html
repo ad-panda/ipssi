@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="containeur">
+        <h1>Bienvenue</h1>
+
+        <div class="question">
+            <h1>Le jeu de la devinette</h1>
+            <p>Trouver le bon chiffre !!!</p>
+            <button onclick="devinette()" id="btn1">Lancer</button>
+            <div id="resultatdevinette" ></div>
+            <img src="../téléchargement.png" alt="image1" onclick= agrandir(this)>
+        </div>
+
+        <div class="question">
+            <h1>La table de multiplication</h1>
+            <button onclick="multiplication()" id="btn2">Lancer</button>
+            <div id="resultattable"></div>
+            <img src="../table.jpeg" alt="image de table" onclick= agrandir(this)>
+        </div>
+
+ 
+        <div class="question">
+            <h1>Le jeu du juste prix</h1>
+            <p>trouver le bon prix</p>
+            <button onclick="justeprix()" id="btn3">Lancer</button>
+            <div id="resultatjusteprix"></div>
+            <img src="../justeprix.jpeg" alt="image de justeprix" onclick= agrandir(this)>
+        </div>
+
+
+        <div class="question">
+            <h1>La Calculatrice</h1>
+            <p>faites le calcul que vous voulez !!! dans la limite du raisonnable</p>
+            <button onclick="calculatrice()" id="btn4">Lancer</button>
+            <div id="resultatcalculatrice"></div>
+            <img src="../calculette.jpeg" alt="image de calculette" onclick="agrandir(this)">
+        </div>
+        <script>
+        function agrandir(image){
+            if (image.classList.contains("grande")){
+                image.classList.remove("grande");
+            } else {
+                image.classList.add("grande");
+            }
+        }
+    </script>
+
+        <div class="question">
+            <h1>Modifions la couleur des boutons</h1>
+            <p>Clique sur un des boutons pour changer la couleur des autres</p>
+            <button id="btn5" onclick="changercouleur('btn1'); changercouleur('btn3')">changer couleur bouton 1 et 3</button>
+            <button id="btn6" onclick="changercouleur('btn2');changercouleur('btn4')">changer couleur bouton 2 et 4</button>
+            <button id="btn7" onclick="changercouleur('btn5');changercouleur('btn6');changercouleur('btn7')">changer tous les boutons de couleurs</button>
+            <script>
+                function changercouleur(idbouton,couleurback,couleur){
+                    const bouton = document.getElementById(idbouton);
+
+                    bouton.style.backgroundColor = "red";
+                    bouton.style.color = "white";
+
+                    console.log(`Le bouton ${idbouton} a changé de couleur en red and white}`);
+                }
+            </script>
+        </div>
+
+        <div id="cercle" class="question" style="width:100px;height:100px;margin:auto;border-radius:50%;background:green"></div>
+
+        <div class="question">
+            <button id="btn8" onclick="inserertext('btn8');verif('btn8')"></button>
+            <button id="btn9" onclick="inserertext('btn9');verif('btn9')"></button>
+            <button id="btn10" onclick="inserertext('btn10');verif('btn10')"></button>
+            <button id="btn11" onclick="inserertext('btn11');verif('btn11')"></button>
+            <button id="btn12" onclick="inserertext('btn12');verif('btn12')"></button>
+            <button id="btn13" onclick="inserertext('btn13');verif('btn13')"></button>
+            <button id="btn14" onclick="inserertext('btn14');verif('btn14')"></button>
+            <button id="btn15" onclick="inserertext('btn15');verif('btn15')"></button>
+            <button id="btn16" onclick="inserertext('btn16');verif('btn16')"></button>
+        </div>
+
+
+        <script>
+        const ab = "../calculette.jpeg"
+        const ba = "../table.jpeg";
+        
+        function inserertext(idBouton) {
+            let bouton = document.getElementById(idBouton);
+            bouton.innerHTML = `<img src="${ba}" alt="image" width="60">`;
+        }
+        
+        function verif(idBouton) {
+            let bouton = document.getElementById(idBouton);
+            let img = bouton.querySelector('img');
+        
+            if (!img) {
+                alert("Pas d'image !");
+                return;
+            }
+        
+            // On compare directement le src relatif
+            if (img.getAttribute('src') === ab) {
+                prompt("✅ l'image de ca;lculette est inserer!");
+            } else if (img.getAttribute('src') === ba){
+                prompt("l'image de la table estv inserer !");
+            }
+        }
+        </script>
+        
+
+
+
+
+
+
+    </div>
+    <script src="devinette.js"></script>
+<script src="multiplication.js"></script>
+<script src="justeprix.js"></script>
+<script src="calculatrice.js"></script>
+
+</body>
+
+</html>

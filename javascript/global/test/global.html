@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Javascript</title>
+    <link rel="stylesheet" href="index.css">
+    <style>
+
+body {
+    background-color: #1e90ff;
+    font-family: Arial, Helvetica, sans-serif;
+    color: white;
+    text-align: center;
+    margin: 0;
+    padding: 0;
+}
+
+.containeur {
+    max-width: 800px;
+    margin: 50px auto;
+    background-color: rgba(0, 0, 50, 0.3);
+    border-radius: 20px;
+    padding: 20px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.3);
+}
+
+
+h1, h2 {
+    color: #fff;
+}
+
+
+.question {
+    background-color: rgba(255, 255, 255, 0.1);
+    margin: 20px 0;
+    padding: 15px;
+    border-radius: 15px;
+}
+
+
+button {
+    background-color: #ffffff;
+    color: #1e90ff;
+    border: none;
+    padding: 10px 20px;
+    margin-top: 10px;
+    font-size: 16px;
+    border-radius: 10px;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: #1c86ee;
+    color: white;
+}
+
+
+#resultatdevinette,
+#resultattable,
+#resultatjusteprix,
+#resultatcalculatrice {
+    margin-top: 10px;
+    font-weight: bold;
+}
+
+    </style>
+</head>
+<body>
+    <div class="containeur">
+        <h1>Bienvenue</h1>
+
+        <div class="question">
+            <h1>Le jeu de la devinette</h1>
+            <p>Trouver le bon chiffre !!!</p>
+            <button id="btn1" onclick="devinette()">Lancer</button>
+            <div id="resultatdevinette" ></div>
+        </div>
+
+        <div class="question">
+            <h1>La table de multiplication</h1>
+            <button id="btn2" onclick="multiplication()">Lancer</button>
+            <div id="resultattable"></div>
+        </div>
+
+ 
+        <div class="question">
+            <h1>Le jeu du juste prix</h1>
+            <p>trouver le bon prix</p>
+            <button id="btn3" onclick="justeprix()">Lancer</button>
+            <div id="resultatjusteprix"></div>
+        </div>
+
+
+        <div class="question">
+            <h1>La Calculatrice</h1>
+            <p>faites le calcul que vous voulez !!! dans la limite du raisonnable</p>
+            <button id="btn4" onclick="calculatrice()">Lancer</button>
+            <div id="resultatcalculatrice"></div>
+        </div>
+
+        <div class="question">
+            <h1>Modifions la couleur des boutons</h1>
+            <p>Clique sur un des boutons pour changer la couleur des autres</p>
+            <button id="btn5" onclick="changercouleur('btn1'); changercouleur('btn3')">changer couleur bouton 1 et 3</button>
+            <button id="btn6" onclick="changercouleur('btn2');changercouleur('btn4')">changer couleur bouton 2 et 4</button>
+            <button id="btn7" onclick="changercouleur('btn5');changercouleur('btn6');changercouleur('btn7')">changer tous les boutons de couleurs</button>
+            <script>
+                function changercouleur(idbouton,couleurback,couleur){
+                    const bouton = document.getElementById(idbouton);
+
+                    bouton.style.backgroundColor = "red";
+                    bouton.style.color = "white";
+
+                    console.log(`Le bouton ${idbouton} a changé de couleur en red and white}`);
+                }
+            </script>
+        </div>
+
+    </div>
+    <script src="devinette.js"></script>
+<script src="multiplication.js"></script>
+<script src="justeprix.js"></script>
+<script src="calculatrice.js"></script>
+
+</body>
+
+</html>

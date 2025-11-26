@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Morpion</title>
+    <link rel="stylesheet" href="style1.css">
+</head>
+<body>
+    <div id="didiv">
+        <h1>🎮 Jeu du Morpion</h1>
+
+        <!-- Formulaire des joueurs -->
+        <form id="joueursForm">
+            <input type="text" id="joueur1" placeholder="Nom du joueur 1 (X)" required>
+            <input type="text" id="joueur2" placeholder="Nom du joueur 2 (O)" required>
+            <button type="button" onclick="commencerJeu()">Commencer</button>
+        </form>
+
+        <p id="tourActuel"></p>
+
+        <table id="tabl">
+            <tr>
+                <th><button id="btn1" onclick="jouer('btn1')"></button></th>
+                <th><button id="btn2" onclick="jouer('btn2')"></button></th>
+                <th><button id="btn3" onclick="jouer('btn3')"></button></th>
+            </tr>
+            <tr>
+                <th><button id="btn4" onclick="jouer('btn4')"></button></th>
+                <th><button id="btn5" onclick="jouer('btn5')"></button></th>
+                <th><button id="btn6" onclick="jouer('btn6')"></button></th>
+            </tr>
+            <tr>
+                <th><button id="btn7" onclick="jouer('btn7')"></button></th>
+                <th><button id="btn8" onclick="jouer('btn8')"></button></th>
+                <th><button id="btn9" onclick="jouer('btn9')"></button></th>
+            </tr>
+        </table>
+
+        <div id="resultatJeu"></div>
+        <button id="resetBtn" onclick="reinitialiser()">🔁 Rejouer</button>
+    </div>
+
+    <div id="overlayVictoire" class="overlay">
+        <h1 id="texteVictoire"></h1>
+    </div>
+
+    <script src="script1.js"></script>
+</body>
+</html>

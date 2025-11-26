@@ -1,0 +1,52 @@
+/* style1.css */
+
+/* Corps de page */
+html, body {
+    height: 100%;
+    margin: 0;
+    display: flex;
+    justify-content: center; /* centre horizontalement */
+    align-items: center;     /* centre verticalement */
+    background-color: #f0f0f0; /* couleur de fond pour voir le centrage */
+    font-family: Arial, sans-serif;
+}
+
+/* Conteneur du morpion */
+#didiv {
+    width: 500px;  /* largeur fixe adaptée à 3x3 cases */
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+/* Tableau du morpion */
+#tabl {
+    border-collapse: collapse;
+    width: 100%;
+    height: 100%;
+    border: 2px solid black;
+}
+
+/* Cellules du tableau */
+th {
+    width: 150px;
+    height: 150px;
+    border: 2px solid black;
+    padding: 0;
+}
+
+/* Boutons dans les cellules */
+button {
+    width: 100%;
+    height: 100%;
+    border: 0;
+    font-size: 2em;
+    cursor: pointer;
+    transition: 0.3s;
+}
+
+button:hover {
+    background-color: rgba(138, 11, 131, 0.555);
+    color: white;
+}

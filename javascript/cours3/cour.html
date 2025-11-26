@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <title>Devinettes</title>
+    <link rel="stylesheet" href="index.css">
+</head>
+<body>
+    <div class="containeur">
+        <h1>Bienvenue</h1>
+
+        <div class="question1">
+            <h1>Le jeux de la devinette</h1>
+            <p>Trouver le bon chiffre !!!</p>
+            <button onclick="devinette()">Lancer</button>
+            <div id="resultatdevinette" ></div>
+        </div>
+
+        <div class="question2">
+            <h1>La table de multiplication</h1>
+            <button onclick="multiplication()">Lancer</button>
+            <div id="resultattable"></div>
+        </div>
+
+ 
+        <div class="question3">
+            <h1>Le jeu du juste prix</h1>
+            <p>trouver le bon prix</p>
+            <button onclick="justeprix()">Lancer</button>
+            <div id="resultatjusteprix"></div>
+        </div>
+
+
+        <div class="question4">
+            <h1>La Calculatrice</h1>
+            <p>faites le calcul que vous voulez !!! dans la limite du raisonnable</p>
+            <button onclick="calculatrice()">Lancer</button>
+        </div>
+
+        <div id="resultat"></div>
+    </div>
+    <script src="devinette.js"></script>
+<script src="multiplication.js"></script>
+<script src="justeprix.js"></script>
+<script src="calculatrice.js"></script>
+
+</body>
+
+</html>
